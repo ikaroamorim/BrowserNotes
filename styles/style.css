@@ -1,0 +1,28 @@
+html, body{
+    height: 100%;
+}
+
+.form{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+form{
+    margin: 50vh 0;
+    padding: 2%;
+    transform: translate(0,-50%);
+    background-color: white;
+    border-radius: 20px;
+}
+
+#form-close{
+    padding: 10px;
+    
+}
+
+
