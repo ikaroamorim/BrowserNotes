@@ -1,35 +1,57 @@
 $(document).ready(function(){
-    var currentId = 1
+    var currentId = 0;
 
-    
+function Note(subject, text, date, checked){
+    this.id = currentId;
+    currentId++;
+    this.subject = subject;
+    this.text =text;
+    this.date = date;
+    this.checked = checked;
+}
 
-    function Note(subject, text, date, checked){
-        this.id = currentId;
-        currentId++;
-        this.subject = subject;
-        this.text =text;
-        this.date = date;
-        this.checked = checked;
-    }
+function newForm(){
+    $('#add-btn').fadeOut(500);
+    /* $('.form').removeClass("hide");*/
+    $('.form').show(500);
 
-    function newForm(){
-        $('#add-btn').fadeOut();
-        $('.form').removeClass("hide");
-    }
+}
 
-    function closeForm(){
-        $('.form').addClass("hide");
-        $('#add-btn').fadeIn();
-    }
+function closeForm(){
+    /* $('.form').addClass("hide");*/
+    $('.form').hide(500);
+    $('#add-btn').fadeIn(500);
+}
 
-    function save(){
-        let titulo = $('#titulo').val();
-        let texto = $('#textarea').val();
-        let data = $('#datepicker').val();
-        let note = new Note(titulo, texto, data, false)
-        arr.push(note);
-        renderNotes();
-    }
+function save(){
+    let titulo = $('#titulo').val();
+    let texto = $('#textarea').val();
+    let data = $('#datepicker').val();
+    let note = new Note(titulo, texto, data, false)
+    arr.push(note);
+    $('#titulo').val('');
+    $('#textarea').val('');
+    $('#datepicker').val('');
+    console.log(arr)
+    renderNotes();
+}
+
+function save(){
+    let titulo = $('#titulo').val();
+    let texto = $('#textarea').val();
+    let data = $('#datepicker').val();
+    let note = new Note(titulo, texto, data, false)
+    arr.push(note);
+    $('#titulo').val('');
+    $('#textarea').val('');
+    $('#datepicker').val('');
+    console.log(arr)
+    renderNotes();
+}
+
+function deleteNote(e){
+    console.log(arr);
+}
 
 
     function renderNotes(){
@@ -43,18 +65,17 @@ $(document).ready(function(){
                     <p>`+ element.text +`</p>
                 </div>
                 <div class="card-action">
-                    <a href="`+ element.id +`">Edit</a>
-                    <a href="#">Exclude</a>
+                    <a href="#"`+ element.id +`">Edit</a>
+                    <a id="exclude-btn-`+ element.id +`">Exclude</a>
                 </div>
             </div>
         </div>
-        <div class="fixed-action-btn" id="add-btn">
-        <a class="btn-floating btn-large waves-effect waves-light red"><i
-                class="material-icons">add</i></a>
-        </div>`
+        `
             $('#main-content').append(el);
         });
     }
+
+    
 
     /* Inicialização do contador do textfield*/
     $('#textarea').characterCounter();
@@ -90,29 +111,27 @@ $(document).ready(function(){
     
 
 
-    console.log('Tudo bem até aqui')
     $('#add-btn').on('click',function(){
-        console.log('clicou antes do newform');
         newForm();
-        console.log('clicou depois do newform');
+
     })
-
     
-    /*$('#add-btn').click(()=>{
-        console.log("clicou");
-        newForm();
-
-    })*/
-
     $('#form-close').click(()=>{
         closeForm();
     })
 
-    $('#btn-save').click(()=>{
+    /*$('#btn-save').click(()=>{
+        console.log( "1");
+        save();
+        console.log( "2");
+        closeForm();
+        console.log( "3");
+    })*/
+
+    $('form').submit(function (e) {
         save();
         closeForm();
-        return false;
-    })
-
+        return false;       
+    });
 
   });
