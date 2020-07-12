@@ -21,9 +21,20 @@ form{
     border-radius: 20px;
 }
 
+form textarea{
+    min-height: 150px;
+}
+
 #form-close{
     padding: 10px;
     cursor: pointer;
 }
 
+.exclude-btn, .edit-btn{
+    cursor: pointer;
+}
+
+.card-line{
+    min-height: 410px;
+}
 
