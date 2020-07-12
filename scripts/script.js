@@ -82,7 +82,7 @@ $(document).ready(function () {
     function renderNotes() {
         $('#main-content').html('');
 
-        if (arr.length > 0) {
+        if (arr != null) {
             for (let i = 0; i < arr.length; i++) {
                 let el = `<div class="col s12 m6 l4 card-line">
                                 <div class="card blue-grey darken-1">
@@ -106,7 +106,7 @@ $(document).ready(function () {
 
     function saveToLocal() {
         console.log(JSON.stringify(arr));
-        localStorage.setItem('teste1', JSON.stringify(arr))
+        localStorage.setItem('browserNotesCards', JSON.stringify(arr))
     }
 
 
@@ -123,7 +123,7 @@ $(document).ready(function () {
     /* 
     Test Data 
     */
-    var n1 = new Note('Card Title1', 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.', d1, false);
+    var n1 = new Note('Card Exemplo', 'Este é um card de exemplo, caso no seu primeiro acesso ele será exibido.', d1, false);
     var n2 = new Note('Card Title2', 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.', d1, true);
     var n3 = new Note('Card Title3', 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.', d1, true);
     var n4 = new Note('Card Title4', 'I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.', d1, true);
@@ -134,41 +134,49 @@ $(document).ready(function () {
 
     var arr = []
 
-    if (JSON.parse(localStorage.getItem('teste1')).length > 0) {
-        arr = JSON.parse(localStorage.getItem('teste1'));
+    if (JSON.parse(localStorage.getItem('browserNotesCards')) == null) {
+        arr.push(n1);
+    } else if (JSON.parse(localStorage.getItem('browserNotesCards')).legnth != 0){
+        arr = JSON.parse(localStorage.getItem('browserNotesCards'));
     }
 
-
-    renderNotes();
-    console.log(arr)
-
-
-
-    $('#add-btn').on('click', function () {
-        newForm();
-
-    })
-
-    $('#form-close').click(() => {
-        closeForm();
-    })
-
-    $('form').submit(function () {
-        save();
-        closeForm();
-        return false;
-    });
+/*
+if (JSON.parse(localStorage.getItem('browserNotesCards')) > 0) {
+    arr = JSON.parse(localStorage.getItem('browserNotesCards'));
+}
+*/
 
 
-    $('.exclude-btn').on('click', function () {
-        let el = this;
-        deleteNote(el);
-    });
+renderNotes();
+console.log(arr)
 
-    $('.edit-btn').on('click', function () {
-        let el = this;
-        editNote(el);
-    });
+
+
+$('#add-btn').on('click', function () {
+    newForm();
+
+})
+
+$('#form-close').click(() => {
+    closeForm();
+})
+
+$('form').submit(function () {
+    save();
+    closeForm();
+    return false;
+});
+
+
+$('.exclude-btn').on('click', function () {
+    let el = this;
+    deleteNote(el);
+});
+
+$('.edit-btn').on('click', function () {
+    let el = this;
+    editNote(el);
+});
 
 
 
